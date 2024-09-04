@@ -14,6 +14,15 @@ const routes: Routes = [
         (m) => m.RegistroPageModule
       ),
   },
+  {
+    path: '',
+    redirectTo: 'login',
+    pathMatch: 'full'
+  },  {
+    path: 'perfil-usuario',
+    loadChildren: () => import('./page/perfil-usuario/perfil-usuario.module').then( m => m.PerfilUsuarioPageModule)
+  }
+
 ];
 
 @NgModule({
