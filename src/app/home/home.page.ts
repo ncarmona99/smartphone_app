@@ -14,10 +14,12 @@ export class HomePage {
   constructor(private router : Router) {}
 
   ngOnInit() {
+    //Se obtiene el usuario enviado al navegar desde página login hacia home con la función login()
     this.user = this.router.getCurrentNavigation()?.extras?.state?.['usuario'];
   }
 
   verPerfil(){
+    //Se redirecciona a la página perfil-usuario enviando el usuario
     this.router.navigate(['perfil-usuario'], {
       state: {
         usuario: this.user

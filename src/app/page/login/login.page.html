@@ -15,13 +15,16 @@
     <ion-list>
       <ion-list>
         <ion-item>
+          <!--Se obtiene el usuario ingresado y se le asigna al user-->
           <ion-input [(ngModel)]="user.usuario" label="Usuario" placeholder=""></ion-input>
         </ion-item>
     
         <ion-item>
+          <!--Se obtiene la password ingresada y se le asigna al user-->
           <ion-input [(ngModel)]="user.password" label="Contraseña" type="password" value=""></ion-input>
         </ion-item>
 
+        <!--El user se entrega por parámetro a la función login()-->
         <ion-button id="button-ingresar" (click)="login(user)"> Ingresar </ion-button>
     
       </ion-list>

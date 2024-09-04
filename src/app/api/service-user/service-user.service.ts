@@ -7,6 +7,21 @@ import { PerfilUsuario } from 'src/app/models/perfil-usuario';
 })
 export class ServiceUserService {
 
+  perfilUsuario: PerfilUsuario= {
+    user: {
+      usuario: "",
+      password: ""
+    },
+    rol: {
+      id: 0,
+      nombre: ""
+    },
+    nombre: "",
+    apellido: "",
+    correo: "",
+    telefono: 0    
+  }
+
   constructor() { }
 
   private lista_usuarios:PerfilUsuario[] = [
@@ -56,15 +71,16 @@ export class ServiceUserService {
 
   ]
 
-  encontrar_usuario(user: User) : User {
+  encontrar_usuario(user: User) : PerfilUsuario {
+    //Se recorre la lista de usuarios hasta que el usuario y password coincidan
     for (let i = 0; i < this.lista_usuarios.length; i++){
       if (this.lista_usuarios[i].user.usuario == user.usuario && this.lista_usuarios[i].user.password == user.password) {
-        return this.lista_usuarios[i].user;
+        //Se retorna el usuario de tipo PerfilUsuario con todos sus atributos
+        return this.lista_usuarios[i];
       }
-    } 
-    user.usuario = "";
-    user.password = "";
-    return user;
+    }
+    //Se retorna un usuario de tipo PerfilUsuario con todos sus atributos vacíos
+    return this.perfilUsuario;
   }
  
   
