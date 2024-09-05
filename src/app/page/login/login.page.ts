@@ -27,6 +27,11 @@ export class LoginPage {
     telefono: 0    
   }
 
+  user: User = {
+    usuario: "",
+    password: ""
+  }
+
   constructor(private _login: ServiceUserService, private router: Router) { }
 
   ngOnInit() {
