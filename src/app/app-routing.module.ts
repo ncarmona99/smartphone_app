@@ -5,24 +5,26 @@ const routes: Routes = [
   {
     path: 'login',
     loadChildren: () =>
-      import('./pages/login/login.module').then((m) => m.LoginPageModule),
+      import('./page/login/login.module').then((m) => m.LoginPageModule),
   },
   {
     path: 'registro',
     loadChildren: () =>
-      import('./pages/registro/registro.module').then(
+      import('./page/registro/registro.module').then(
         (m) => m.RegistroPageModule
       ),
+  },
+  {
+    path: 'perfil-usuario',
+    loadChildren: () => 
+      import('./page/perfil-usuario/perfil-usuario.module').then( 
+        m => m.PerfilUsuarioPageModule)
   },
   {
     path: '',
     redirectTo: 'login',
     pathMatch: 'full'
-  },  {
-    path: 'perfil-usuario',
-    loadChildren: () => import('./page/perfil-usuario/perfil-usuario.module').then( m => m.PerfilUsuarioPageModule)
   }
-
 ];
 
 @NgModule({
