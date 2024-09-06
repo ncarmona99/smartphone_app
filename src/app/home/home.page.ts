@@ -16,6 +16,7 @@ export class HomePage {
   ngOnInit() {
     //Se obtiene el usuario enviado al navegar desde página login hacia home con la función login()
     this.user = this.router.getCurrentNavigation()?.extras?.state?.['usuario'];
+    console.info(this.user);
   }
 
   verPerfil(){
