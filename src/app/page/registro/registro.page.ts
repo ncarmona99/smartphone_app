@@ -1,55 +1,47 @@
-import { Component, OnInit } from '@angular/core';
-import {
-  FormGroup,
-  FormControl,
-  Validators,
-  FormBuilder
-} from '@angular/forms';
-import { AlertController } from '@ionic/angular';
+import { Component } from '@angular/core';
+import { AuthService } from 'src/app/auth.service';
+import { PerfilUsuario } from 'src/app/models/perfil-usuario';
+import { ServiceUserService } from 'src/app/api/service-user/service-user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-registro',
   templateUrl: './registro.page.html',
   styleUrls: ['./registro.page.scss'],
 })
-export class RegistroPage implements OnInit {
+export class RegistroPage {
 
-  formularioRegistro: FormGroup;
-
-  constructor(public fb: FormBuilder,
-    public alertController: AlertController)
-    {
-    this.formularioRegistro = this.fb.group({
-      'user': new FormControl("",Validators.required),
-      'password': new FormControl("",Validators.required),
-      'confirmacionPassword': new FormControl("",Validators.required),
-    })
-
+  perfilUsuario: PerfilUsuario= {
+    user: {
+      usuario: "",
+      password: ""
+    },
+    rol: {
+      id: 2,
+      nombre: "Invitado" //El registro por defecto crea usuarios con rol invitado
+    },
+    nombre: "",
+    apellido: "",
+    correo: "",
+    telefono: 0    
   }
+
+  constructor(private authService: AuthService, private _userService: ServiceUserService, private router: Router) { }
 
   ngOnInit() {
   }
 
-  async guardar(){
-    var f = this.formularioRegistro.value;
+  registrar(perfilUsuario: PerfilUsuario){
+    //Se encripta la contraseña
+    const hashedPassword = this.authService.encryptPassword(perfilUsuario.user.password);
+    console.log('Contraseña encriptada:', hashedPassword);
+    //Se asigna la contraseña encriptada el usuario de tipo PerfilUsuario
+    perfilUsuario.user.password = hashedPassword;
+    //Se agrega el usuario a la lista de usuarios
+    this._userService.agregar_usuario(perfilUsuario);
+    this.router.navigate(['login'])
 
-    if(this.formularioRegistro.invalid){
-      const alert = await this.alertController.create({
-        header: 'Datos incompletos',
-        message: 'Tienes que llenar todos los datos.',
-        buttons: ['Aceptar']
-      })
-
-      await alert.present();
-      return;
-    }
-
-    var usuario = {
-      nombre: f.nombre,
-      password: f.password,
-    }
-
-    localStorage.setItem('usuario',JSON.stringify(usuario))
   }
+
 
 }
