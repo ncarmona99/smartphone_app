@@ -14,7 +14,8 @@ export class RegistroPage {
   perfilUsuario: PerfilUsuario= {
     user: {
       usuario: "",
-      password: ""
+      password: "",
+      pass: ""
     },
     rol: {
       id: 2,
@@ -32,14 +33,28 @@ export class RegistroPage {
   }
 
   registrar(perfilUsuario: PerfilUsuario){
-    //Se encripta la contraseña
-    const hashedPassword = this.authService.encryptPassword(perfilUsuario.user.password);
-    console.log('Contraseña encriptada:', hashedPassword);
-    //Se asigna la contraseña encriptada el usuario de tipo PerfilUsuario
-    perfilUsuario.user.password = hashedPassword;
-    //Se agrega el usuario a la lista de usuarios
-    this._userService.agregar_usuario(perfilUsuario);
-    this.router.navigate(['login'])
+    if (perfilUsuario.user.usuario.length > 20){
+      console.log("Nombre de usuario es demaisado largo (máximo de 20 caracteres)");
+    }
+    else if (perfilUsuario.user.usuario.length < 4){
+      console.log("Nombre de usuario es demaisado corto (mínimo de 4 caracteres)");
+    }
+    else if (perfilUsuario.user.password != perfilUsuario.user.pass){
+      console.log("Las contaseñas no coinciden. Ingresar nuevamente");
+    }
+    else if (perfilUsuario.user.password != perfilUsuario.user.pass){
+      console.log("Las contaseñas no coinciden. Ingresar nuevamente");
+    }
+    else{
+      //Se encripta la contraseña
+      const hashedPassword = this.authService.encryptPassword(perfilUsuario.user.password);
+      console.log('Contraseña encriptada:', hashedPassword);
+      //Se asigna la contraseña encriptada el usuario de tipo PerfilUsuario
+      perfilUsuario.user.password = hashedPassword;
+      //Se agrega el usuario a la lista de usuarios
+      this._userService.agregar_usuario(perfilUsuario);
+      this.router.navigate(['login'])
+    }
 
   }
 
