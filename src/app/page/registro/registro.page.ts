@@ -34,7 +34,18 @@ export class RegistroPage {
   }
 
   async registrar(perfilUsuario: PerfilUsuario){
-    if (perfilUsuario.user.usuario.length > 20){
+    if (perfilUsuario.user.usuario === "" || perfilUsuario.user.password === "" || perfilUsuario.user.pass === ""
+        || perfilUsuario.nombre === "" || perfilUsuario.apellido === "" || perfilUsuario.telefono.toString() === ""
+        || perfilUsuario.correo === ""){
+      console.log("No pueden haber campos vacíos");
+      const alert = await this.alertController.create({
+        header: 'ERROR',
+        message: 'No pueden haber campos vacíos',
+        buttons: ['Aceptar'],
+      });
+      await alert.present();
+    }
+    else if (perfilUsuario.user.usuario.length > 20){
       console.log("Nombre de usuario es demaisado largo (máximo de 20 caracteres)");
       const alert = await this.alertController.create({
         header: 'ERROR',
