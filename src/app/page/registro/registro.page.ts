@@ -3,6 +3,7 @@ import { AuthService } from 'src/app/auth.service';
 import { PerfilUsuario } from 'src/app/models/perfil-usuario';
 import { ServiceUserService } from 'src/app/api/service-user/service-user.service';
 import { Router } from '@angular/router';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-registro',
@@ -27,26 +28,60 @@ export class RegistroPage {
     telefono: 0    
   }
 
-  constructor(private authService: AuthService, private _userService: ServiceUserService, private router: Router) { }
+  constructor(private authService: AuthService, private _userService: ServiceUserService, private router: Router, private alertController: AlertController) { }
 
   ngOnInit() {
   }
 
-  registrar(perfilUsuario: PerfilUsuario){
+  async registrar(perfilUsuario: PerfilUsuario){
     if (perfilUsuario.user.usuario.length > 20){
       console.log("Nombre de usuario es demaisado largo (máximo de 20 caracteres)");
+      const alert = await this.alertController.create({
+        header: 'ERROR',
+        message: 'Nombre de usuario es demaisado largo (máximo de 20 caracteres)',
+        buttons: ['Aceptar'],
+      });
+      await alert.present();
     }
     else if (perfilUsuario.user.usuario.length < 4){
       console.log("Nombre de usuario es demaisado corto (mínimo de 4 caracteres)");
+      const alert = await this.alertController.create({
+        header: 'ERROR',
+        message: 'Nombre de usuario es demaisado corto (mínimo de 4 caracteres)',
+        buttons: ['Aceptar'],
+      });
+  
+      await alert.present();
     }
     else if (perfilUsuario.user.password != perfilUsuario.user.pass){
       console.log("Las contaseñas no coinciden. Ingresar nuevamente");
+      const alert = await this.alertController.create({
+        header: 'ERROR',
+        message: 'Las contaseñas no coinciden. Ingresar nuevamente',
+        buttons: ['Aceptar'],
+      });
+  
+      await alert.present();
     }
     else if (perfilUsuario.correo.includes('@') == false || perfilUsuario.correo.includes('.') == false){
       console.log("El correo electrónico no es válido. Ingrese nuevamente");
+      const alert = await this.alertController.create({
+        header: 'ERROR',
+        message: 'El correo electrónico no es válido. Ingrese nuevamente',
+        buttons: ['Aceptar'],
+      });
+  
+      await alert.present();
     }
     else if (perfilUsuario.telefono.toString().length != 9){
       console.log("El teléfono debe contener 9 dígitos");
+      const alert = await this.alertController.create({
+        header: 'ERROR',
+        message: 'El teléfono debe contener 9 dígitos',
+        buttons: ['Aceptar'],
+      });
+  
+      await alert.present();
     }
     else{
       //Se encripta la contraseña
