@@ -42,8 +42,8 @@ export class RegistroPage {
     else if (perfilUsuario.user.password != perfilUsuario.user.pass){
       console.log("Las contaseñas no coinciden. Ingresar nuevamente");
     }
-    else if (perfilUsuario.user.password != perfilUsuario.user.pass){
-      console.log("Las contaseñas no coinciden. Ingresar nuevamente");
+    else if (perfilUsuario.correo.includes('@') == false || perfilUsuario.correo.includes('.') == false){
+      console.log("El correo electrónico no es válido. Ingrese nuevamente");
     }
     else{
       //Se encripta la contraseña
