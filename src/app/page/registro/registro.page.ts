@@ -45,6 +45,9 @@ export class RegistroPage {
     else if (perfilUsuario.correo.includes('@') == false || perfilUsuario.correo.includes('.') == false){
       console.log("El correo electrónico no es válido. Ingrese nuevamente");
     }
+    else if (perfilUsuario.telefono.toString().length != 9){
+      console.log("El teléfono debe contener 9 dígitos");
+    }
     else{
       //Se encripta la contraseña
       const hashedPassword = this.authService.encryptPassword(perfilUsuario.user.password);
