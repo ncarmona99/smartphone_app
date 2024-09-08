@@ -25,15 +25,15 @@ export class RegistroPage {
     nombre: "",
     apellido: "",
     correo: "",
-    telefono: 0   
+    telefono: null  
   }
 
   constructor(private authService: AuthService, private _userService: ServiceUserService, private router: Router, private alertController: AlertController) { }
 
   ngOnInit() {
-    if (this.perfilUsuario.telefono === 0) {
-      this.perfilUsuario.telefono = null;
-  }}
+    this.limpiar();
+
+  }
 
   limpiar(){
     this.perfilUsuario.nombre = "";
@@ -44,6 +44,8 @@ export class RegistroPage {
     this.perfilUsuario.user.password = "";
     this.perfilUsuario.user.usuario = "";
   }
+
+  
 
   async registrar(perfilUsuario: PerfilUsuario){
     if (perfilUsuario.user.usuario === "" || perfilUsuario.user.password === "" || perfilUsuario.user.pass === ""
@@ -114,7 +116,6 @@ export class RegistroPage {
       perfilUsuario.user.password = hashedPassword;
       //Se agrega el usuario a la lista de usuarios
       this._userService.agregar_usuario(perfilUsuario);
-      this.limpiar();
       this.router.navigate(['login'])
     }
 
