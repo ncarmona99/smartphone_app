@@ -1,33 +1,18 @@
-<ion-header>
-  <ion-toolbar color="primary">
-    <ion-title>Login</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Login</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <div id="container">
-    <ion-list>
-      <ion-list>
-        <ion-item>
-          <!--Se obtiene el usuario ingresado y se le asigna al user-->
-          <ion-input [(ngModel)]="user.usuario" label="Usuario" placeholder=""></ion-input>
-        </ion-item>
-    
-        <ion-item>
-          <!--Se obtiene la password ingresada y se le asigna al user-->
-          <ion-input [(ngModel)]="user.password" label="Contraseña" type="password" value=""></ion-input>
-        </ion-item>
-
+  <div class="page">
+    <div class="login">
+      <h1>Login</h1>
+      <div class="inputs">
+        <!--Se obtiene el usuario ingresado y se le asigna al user-->
+        <label for="Usuario">Usuario</label>
+        <input [(ngModel)]="user.usuario" label="Usuario" placeholder="">
+        <!--Se obtiene la password ingresada y se le asigna al user-->
+        <label for="Contraseña">Contraseña</label>
+        <input [(ngModel)]="user.password" label="Contraseña" type="password" value="">
         <!--El user se entrega por parámetro a la función login()-->
-        <ion-button id="button-ingresar" (click)="login(user)"> Ingresar </ion-button>
-    
-      </ion-list>
-    </ion-list>
+        <button id="button-ingresar" (click)="login(user)"> Ingresar </button>
+        <a href=""> ¿no tienes una cuenta?</a>
+      </div>
+    </div>
   </div>
 </ion-content>
