@@ -1,13 +1,40 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>perfil-usuario</ion-title>
+    <ion-title>Mi Perfil</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">perfil-usuario</ion-title>
-    </ion-toolbar>
-  </ion-header>
+
+  <div class="contenedor">
+    <div class="info">
+      <div class="datos">
+        <div class="perfil">
+          <img src="/assets/images/user.jpg" alt="user">
+        </div>
+        <div class="nombre">
+          <p>{{user.nombre}} {{user.apellido}}</p>
+        </div>
+        <div class="email">
+          <p>{{user.correo}}</p>
+        </div>
+        <div class="telefono">
+          <p>Telefono: {{user.telefono}}</p>
+        </div>
+      </div>
+    </div>
+    <div class="conf">
+      <h3>Cambiar Contraseña</h3>
+      <div class="inputs">
+        <label for="Contraseña">Contraseña Actual</label>
+        <input id="password" type="password" label="Contraseña" value="">
+        <label for="Contraseña">Nueva Contraseña</label>
+        <input id="Npassword" type="password" label="NuevaContraseña" value="">
+        <label for="Contraseña">Confirmar Contraseña</label>
+        <input id="Rpassword" type="password" label="RepetirContraseña" value="">
+        <button id="CambiarContraseña"> Cambiar </button>
+      </div>
+    </div>
+  </div>
+
 </ion-content>
