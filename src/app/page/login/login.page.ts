@@ -39,6 +39,12 @@ export class LoginPage {
 
   ngOnInit() {
   }
+
+  //función para limpiar los campos
+  limpiar(){
+    this.perfilUsuario.user.password = "";
+    this.perfilUsuario.user.usuario = "";
+  }
   
   //La función recibe el user (usuario y password) como parámetro desde el html
   login(user: User) {
@@ -52,6 +58,7 @@ export class LoginPage {
       console.info("el usuario existe");
       console.info(this.perfilUsuario);
       //Se redirecciona a la página home enviando el usuario de tipo PerfilUsuario con todos sus atributos
+      this.limpiar();
       this.router.navigate(['home'], {
       state: {
       user: this.perfilUsuario
@@ -59,6 +66,7 @@ export class LoginPage {
       })
     } else {
       console.error("el usuario no existe")
+      this.limpiar();
     }
   }
 

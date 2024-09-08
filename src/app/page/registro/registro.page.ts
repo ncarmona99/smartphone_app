@@ -25,17 +25,29 @@ export class RegistroPage {
     nombre: "",
     apellido: "",
     correo: "",
-    telefono: 0    
+    telefono: 0   
   }
 
   constructor(private authService: AuthService, private _userService: ServiceUserService, private router: Router, private alertController: AlertController) { }
 
   ngOnInit() {
+    if (this.perfilUsuario.telefono === 0) {
+      this.perfilUsuario.telefono = null;
+  }}
+
+  limpiar(){
+    this.perfilUsuario.nombre = "";
+    this.perfilUsuario.apellido = "";
+    this.perfilUsuario.correo = "";
+    this.perfilUsuario.telefono = null;
+    this.perfilUsuario.user.pass = "";
+    this.perfilUsuario.user.password = "";
+    this.perfilUsuario.user.usuario = "";
   }
 
   async registrar(perfilUsuario: PerfilUsuario){
     if (perfilUsuario.user.usuario === "" || perfilUsuario.user.password === "" || perfilUsuario.user.pass === ""
-        || perfilUsuario.nombre === "" || perfilUsuario.apellido === "" || perfilUsuario.telefono.toString() === ""
+        || perfilUsuario.nombre === "" || perfilUsuario.apellido === "" || perfilUsuario.telefono == null
         || perfilUsuario.correo === ""){
       console.log("No pueden haber campos vacíos");
       const alert = await this.alertController.create({
@@ -74,7 +86,7 @@ export class RegistroPage {
   
       await alert.present();
     }
-    else if (perfilUsuario.correo.includes('@') == false || perfilUsuario.correo.includes('.') == false){
+    else if (perfilUsuario.correo.includes('@') == false || perfilUsuario.correo.includes('.') == false || /[a-zA-Z]/.test(perfilUsuario.correo) == false){
       console.log("El correo electrónico no es válido. Ingrese nuevamente");
       const alert = await this.alertController.create({
         header: 'ERROR',
@@ -102,6 +114,7 @@ export class RegistroPage {
       perfilUsuario.user.password = hashedPassword;
       //Se agrega el usuario a la lista de usuarios
       this._userService.agregar_usuario(perfilUsuario);
+      this.limpiar();
       this.router.navigate(['login'])
     }
 

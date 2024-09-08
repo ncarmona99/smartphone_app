@@ -7,5 +7,5 @@ export interface PerfilUsuario{
     nombre: string;
     apellido: string;
     correo: string;
-    telefono: number;
+    telefono: number | null;
 }

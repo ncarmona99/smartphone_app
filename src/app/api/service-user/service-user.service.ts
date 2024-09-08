@@ -20,7 +20,7 @@ export class ServiceUserService {
     nombre: "",
     apellido: "",
     correo: "",
-    telefono: 0    
+    telefono: 0   
   }
 
   constructor() { }
