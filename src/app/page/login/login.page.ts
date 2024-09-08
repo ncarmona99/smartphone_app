@@ -26,7 +26,7 @@ export class LoginPage {
     nombre: "",
     apellido: "",
     correo: "",
-    telefono: 0    
+    telefono: ""   
   }
 
   user: User = {

@@ -20,7 +20,7 @@ export class ServiceUserService {
     nombre: "",
     apellido: "",
     correo: "",
-    telefono: 0   
+    telefono: ""  
   }
 
   constructor() { }
@@ -41,7 +41,7 @@ export class ServiceUserService {
       "nombre": "Juana",
       "apellido": "Pérez",
       "correo": "juanaperez@mail.com",
-      "telefono": 987654321
+      "telefono": "987654321"
     },
     {
       "user": {
@@ -57,7 +57,7 @@ export class ServiceUserService {
       "nombre": "Pedro",
       "apellido": "López",
       "correo": "pedrolopez@mail.com",
-      "telefono": 912345678
+      "telefono": "912345678"
     },
     {
       "user": {
@@ -73,7 +73,7 @@ export class ServiceUserService {
       "nombre": "Luisa",
       "apellido": "Silva",
       "correo": "luisasilva@mail.com",
-      "telefono": 998765432
+      "telefono": "998765432"
     },
 
   ]
