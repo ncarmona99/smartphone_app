@@ -11,11 +11,11 @@
         <p class="msg_error" *ngIf = "error.usuario"> {{error.usuario}}</p>
 
         <label class="titulo_campo" for="password">Contraseña</label>
-        <input class="sin_borde" required type="password" name="password" [(ngModel)]="perfilUsuario.user.pass">
+        <input class="sin_borde" required type="password" name="password" [(ngModel)]="perfilUsuario.user.password">
         <p class="msg_error" *ngIf = "error.password"> {{error.password}}</p>
 
         <label class="titulo_campo" for="confirmPassword">Confirmar Contraseña</label>
-        <input class="sin_borde" required type="password" [(ngModel)]="perfilUsuario.user.password"
+        <input class="sin_borde" required type="password"[(ngModel)]="passwordConfirm"
           name="confirmPassword">
         <p class="msg_error" *ngIf = "error.password_match"> {{error.password_match}}</p>
 

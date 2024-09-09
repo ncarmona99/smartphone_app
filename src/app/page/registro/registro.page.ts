@@ -21,8 +21,7 @@ export class RegistroPage {
   perfilUsuario: PerfilUsuario = {
     user: {
       usuario: "",
-      password: "",
-      pass: ""
+      password: ""
     },
     rol: {
       id: 2,
@@ -36,9 +35,11 @@ export class RegistroPage {
 
   error: ErrorPerfilUsuario = {};
 
+  passwordConfirm: String = "";
+
   constructor(private authService: AuthService, private _userService: ServiceUserService, private router: Router, private alertController: AlertController) { }
 
-  ngOnInit() {
+  ngOnInit(): void{
     this.limpiar();
   }
 
@@ -47,7 +48,6 @@ export class RegistroPage {
     this.perfilUsuario.apellido = "";
     this.perfilUsuario.correo = "";
     this.perfilUsuario.telefono = "";
-    this.perfilUsuario.user.pass = "";
     this.perfilUsuario.user.password = "";
     this.perfilUsuario.user.usuario = "";
   }
@@ -113,12 +113,12 @@ export class RegistroPage {
     }
 
     // Verifica la longitud mínima de la contraseña
-    if (perfilUsuario.user.pass.length < 8) {
+    if (perfilUsuario.user.password.length < 8) {
       error.password = "La contraseña debe tener al menos 8 caracteres";
       aplicarEstilos(inputPassword, error.password, true);
       // La contraseña de confirmación debe también tener borde rojo y placeholder vacío
       aplicarEstilos(inputPassConfirm, '', true);
-    } else if (perfilUsuario.user.password !== perfilUsuario.user.pass) {
+    } else if (perfilUsuario.user.password !== this.passwordConfirm) {
       // Verifica coincidencia de contraseñas
       error.password_match = "Las contraseñas no coinciden.";
       aplicarEstilos(inputPassword, '', false);

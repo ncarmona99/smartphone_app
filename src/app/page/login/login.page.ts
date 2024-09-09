@@ -16,8 +16,7 @@ export class LoginPage {
   perfilUsuario: PerfilUsuario = {
     user: {
       usuario: "",
-      password: "",
-      pass: "",
+      password: ""
     },
     rol: {
       id: 0,
@@ -31,8 +30,7 @@ export class LoginPage {
 
   user: User = {
     usuario: "",
-    password: "",
-    pass: ""
+    password: ""
   }
 
   constructor(private _userService: ServiceUserService, private router: Router, private authService: AuthService) { }
