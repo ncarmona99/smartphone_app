@@ -38,6 +38,7 @@ export class LoginPage {
   constructor(private _userService: ServiceUserService, private router: Router, private authService: AuthService) { }
 
   ngOnInit() {
+    this.limpiar()
   }
 
   //función para limpiar los campos
