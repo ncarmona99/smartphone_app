@@ -18,7 +18,7 @@ import { ErrorPerfilUsuario } from 'src/app/models/error-perfil-usuario';
 })
 export class RegistroPage {
 
-  perfilUsuario: PerfilUsuario= {
+  perfilUsuario: PerfilUsuario = {
     user: {
       usuario: "",
       password: "",
@@ -31,7 +31,7 @@ export class RegistroPage {
     nombre: "",
     apellido: "",
     correo: "",
-    telefono: "", 
+    telefono: "",
   }
 
   error: ErrorPerfilUsuario = {};
@@ -42,7 +42,7 @@ export class RegistroPage {
     this.limpiar();
   }
 
-  limpiar(){
+  limpiar() {
     this.perfilUsuario.nombre = "";
     this.perfilUsuario.apellido = "";
     this.perfilUsuario.correo = "";
@@ -62,46 +62,98 @@ export class RegistroPage {
     await alert.present();
   }
 
-  validarPerfilUsuario = (perfilUsuario: PerfilUsuario): ErrorPerfilUsuario => {
-    
-    // Verifica campos vacíos
-    if (Object.values(perfilUsuario.user).some(field => field === "") ||
-        Object.values(perfilUsuario).some(field => field === null || field === "")) {
-      this.error.general = "No pueden haber campos vacíos";
-    }
-  
+
+  validarPerfilUsuario = (perfilUsuario: PerfilUsuario) => {
+    const error: any = {}; // Reiniciar errores antes de la validación
+
+    // Selección de inputs por nombre
+    const inputUsuario = document.getElementsByName('username')[0] as HTMLInputElement;
+    const inputPassword = document.getElementsByName('password')[0] as HTMLInputElement;
+    const inputPassConfirm = document.getElementsByName('confirmPassword')[0] as HTMLInputElement;
+    const inputNombre = document.getElementsByName('firstName')[0] as HTMLInputElement;
+    const inputApellido = document.getElementsByName('lastName')[0] as HTMLInputElement;
+    const inputCorreo = document.getElementsByName('email')[0] as HTMLInputElement;
+    const inputTelefono = document.getElementsByName('phone')[0] as HTMLInputElement;
+
+    // Función para aplicar o quitar clases de error
+    const aplicarEstilos = (input: HTMLInputElement, errorMsg: string, esError: boolean) => {
+      if (esError) {
+        input.classList.add('borde_rojo');
+        input.classList.remove('sin_borde');
+      } else {
+        input.classList.add('sin_borde');
+        input.classList.remove('borde_rojo');
+      }
+      // Para el placeholder
+      input.placeholder = esError ? errorMsg : '';
+    };
+
     // Verifica longitud del nombre de usuario
     if (perfilUsuario.user.usuario.length > 20) {
-      this.error.usuario = "Nombre de usuario es demasiado largo (máximo de 20 caracteres)";
+      error.usuario = "usuario demasiado largo (máximo de 20 caracteres)";
+      aplicarEstilos(inputUsuario, error.usuario, true);
     } else if (perfilUsuario.user.usuario.length < 4) {
-      this.error.usuario = "Nombre de usuario es demasiado corto (mínimo de 4 caracteres)";
+      error.usuario = "usuario demasiado corto (mínimo de 4 caracteres)";
+      aplicarEstilos(inputUsuario, error.usuario, true);
+    } else {
+      aplicarEstilos(inputUsuario, '', false);
     }
+
+    // Verifica si el nombre está vacío
     if (perfilUsuario.nombre === "") {
-      this.error.nombre = "Ingrese su nombre"
+      error.nombre = "Ingrese su nombre";
+      aplicarEstilos(inputNombre, error.nombre, true);
+    } else {
+      aplicarEstilos(inputNombre, '', false);
     }
+
+    // Verifica si el apellido está vacío
     if (perfilUsuario.apellido === "") {
-      this.error.apellido = "Ingrese su apellido"
-    }  
-    // Verifica coincidencia de contraseñas
-    if (perfilUsuario.user.password !== perfilUsuario.user.pass) {
-      this.error.password = "Las contraseñas no coinciden. Ingréselas nuevamente";
-    }  
+      error.apellido = "Ingrese su apellido";
+      aplicarEstilos(inputApellido, error.apellido, true);
+    } else {
+      aplicarEstilos(inputApellido, '', false);
+    }
+
+    // Verifica la longitud mínima de la contraseña
+    if (perfilUsuario.user.pass.length < 8) {
+      error.password = "La contraseña debe tener al menos 8 caracteres";
+      aplicarEstilos(inputPassword, error.password, true);
+      // La contraseña de confirmación debe también tener borde rojo y placeholder vacío
+      aplicarEstilos(inputPassConfirm, '', true);
+    } else if (perfilUsuario.user.password !== perfilUsuario.user.pass) {
+      // Verifica coincidencia de contraseñas
+      error.password = "Las contraseñas no coinciden.";
+      aplicarEstilos(inputPassword, '', false);
+      aplicarEstilos(inputPassConfirm, error.password, true);
+    } else {
+      aplicarEstilos(inputPassword, '', false);
+      aplicarEstilos(inputPassConfirm, '', false);
+    }
+
     // Verifica formato del correo electrónico
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(perfilUsuario.correo)) {
-      this.error.correo = "El correo electrónico no es válido. Ingrese su correo nuevamente";
-    }  
+      error.correo = "Correo electrónico no válido.";
+      aplicarEstilos(inputCorreo, error.correo, true);
+    } else {
+      aplicarEstilos(inputCorreo, '', false);
+    }
+
     // Verifica que el teléfono contenga solo caracteres numéricos y tenga exactamente 9 dígitos
     if (perfilUsuario.telefono.length !== 9) {
-      this.error.telefono = "El teléfono debe contener 9 dígitos";
+      error.telefono = "El teléfono debe contener 9 dígitos";
+      aplicarEstilos(inputTelefono, error.telefono, true);
+    } else {
+      aplicarEstilos(inputTelefono, '', false);
     }
-  
-    return this.error;
+
+    return error;
   };
 
-  registrar() {
+
+  registrar(perfilUsuario: PerfilUsuario) {
     // Actualiza errores
     this.error = this.validarPerfilUsuario(this.perfilUsuario);
-
     if (Object.keys(this.error).length > 0) {
       console.log("Errores encontrados:", this.error);
       this.showAlert('ERROR', 'Por favor, corrige los errores antes de continuar.');
@@ -112,10 +164,10 @@ export class RegistroPage {
     const hashedPassword = this.authService.encryptPassword(this.perfilUsuario.user.password);
     console.log('Contraseña encriptada:', hashedPassword);
     this.perfilUsuario.user.password = hashedPassword;
-    
+
     // Agrega el usuario a la lista de usuarios
     this._userService.agregar_usuario(this.perfilUsuario);
     this.router.navigate(['login']);
   }
-
 }
+

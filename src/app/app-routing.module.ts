@@ -16,19 +16,19 @@ const routes: Routes = [
   },
   {
     path: 'perfil-usuario',
-    loadChildren: () => 
-      import('./page/perfil-usuario/perfil-usuario.module').then( 
+    loadChildren: () =>
+      import('./page/perfil-usuario/perfil-usuario.module').then(
         m => m.PerfilUsuarioPageModule)
   },
   {
     path: 'home',
-    loadChildren: () => 
-      import('./home/home.module').then( 
+    loadChildren: () =>
+      import('./home/home.module').then(
         m => m.HomePageModule)
   },
   {
     path: '',
-    redirectTo: 'registro',
+    redirectTo: 'login',
     pathMatch: 'full'
   }
 ];
@@ -39,4 +39,4 @@ const routes: Routes = [
   ],
   exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

@@ -11,7 +11,7 @@
         <input [(ngModel)]="user.password" label="Contraseña" type="password" value="">
         <!--El user se entrega por parámetro a la función login()-->
         <button id="button-ingresar" (click)="login(user)"> Ingresar </button>
-        <a href=""> ¿no tienes una cuenta?</a>
+        <a (click)="IrRegistro()"> ¿no tienes una cuenta?</a>
       </div>
     </div>
   </div>

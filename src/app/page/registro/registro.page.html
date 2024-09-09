@@ -1,73 +1,35 @@
 <ion-header>
-  <ion-toolbar color="primary">
-    <ion-title>Registro</ion-title>
-  </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Registro</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
   <div id="container">
-    <ion-list>
+    <div class="form">
+      <h3>Registro</h3>
+      <div class="inputs">
+        <label for="username">Usuario</label>
+        <input class="sin_borde" required type="text" [(ngModel)]="perfilUsuario.user.usuario" name="username">
 
-      <ion-item >
-        <ion-label position="floating">Usuario</ion-label><br>
-        <ion-input required type="text" fill="solid" [(ngModel)]="perfilUsuario.user.usuario" name="username"></ion-input>
-        <ion-text class= "texto-error" color="danger" *ngIf="error.usuario">
-          <p>{{ error.usuario }}</p>
-        </ion-text>
-      </ion-item>
-    
-      <ion-item >
-        <ion-label position="floating">Contraseña</ion-label><br>
-        <ion-input  class= "texto-error" required type="password" fill="solid" name="password" [(ngModel)]="perfilUsuario.user.pass"></ion-input>
-      </ion-item>
- 
-      <ion-item >
-        <ion-label position="floating">Confirmar Contraseña</ion-label><br>
-        <ion-input required type="password" fill="solid" [(ngModel)]="perfilUsuario.user.password" name="confirmPassword"></ion-input>
-        <ion-text class= "texto-error" color="danger" *ngIf="error.password">
-          <p>{{ error.password }}</p>
-        </ion-text>
-      </ion-item>
-    
-      <ion-item >
-        <ion-label position="floating">Nombre</ion-label><br>
-        <ion-input required type="text" fill="solid" [(ngModel)]="perfilUsuario.nombre" name="firstName"></ion-input>
-        <ion-text class= "texto-error" color="danger" *ngIf="error.nombre">
-          <p>{{ error.nombre }}</p>
-        </ion-text>
-      </ion-item>
-    
-      <ion-item >
-        <ion-label position="floating">Apellido</ion-label><br>
-        <ion-input required type="text" fill="solid" [(ngModel)]="perfilUsuario.apellido" name="lastName"></ion-input>
-        <ion-text class= "texto-error" color="danger" *ngIf="error.apellido">
-          <p>{{ error.apellido }}</p>
-        </ion-text>
-      </ion-item>
-    
-      <ion-item >
-        <ion-label position="floating">Email</ion-label><br>
-        <ion-input required type="email" fill="solid" [(ngModel)]="perfilUsuario.correo" name="email"></ion-input>
-        <ion-text class= "texto-error" color="danger" *ngIf="error.correo">
-          <p>{{ error.correo }}</p>
-        </ion-text>
-      </ion-item>
-    
-      <ion-item >
-        <ion-label position="floating">Teléfono</ion-label><br>
-        <ion-input clear-input required type="text" fill="solid" [(ngModel)]="perfilUsuario.telefono" name="phone"></ion-input>
-        <ion-text class= "texto-error" color="danger" *ngIf="error.telefono">
-          <p>{{ error.telefono }}</p>
-        </ion-text>
-      </ion-item>
-    
-      <ion-button expand="full" type="submit" (click)="registrar()">Registrar</ion-button>
-    </ion-list>
+        <label for="password">Contraseña</label>
+        <input class="sin_borde" required type="password" name="password" [(ngModel)]="perfilUsuario.user.pass">
+
+        <label for="confirmPassword">Confirmar Contraseña</label>
+        <input class="sin_borde" required type="password" [(ngModel)]="perfilUsuario.user.password"
+          name="confirmPassword">
+
+        <label for="firstName">Nombre</label>
+        <input class="sin_borde" type="text" [(ngModel)]="perfilUsuario.nombre" name="firstName">
+
+        <label for="lastName">Apellido</label>
+        <input class="sin_borde" required type="text" [(ngModel)]="perfilUsuario.apellido" name="lastName">
+
+        <label for="email">Email</label>
+        <input class="sin_borde" required type="email" [(ngModel)]="perfilUsuario.correo" name="email">
+
+        <label for="phone">Telefono</label>
+        <input class="sin_borde" required type="text" [(ngModel)]="perfilUsuario.telefono" name="phone">
+
+        <button type="submit" (click)="registrar(perfilUsuario)">Registrar</button>
+      </div>
+    </div>
   </div>
 </ion-content>
