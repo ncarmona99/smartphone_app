@@ -18,4 +18,8 @@ export class PerfilUsuarioPage implements OnInit {
     this.user = this.router.getCurrentNavigation()?.extras?.state?.['usuario'];
     console.info(this.user);
   }
+
+  irHome(){
+    this.router.navigate(['home']);
+  }
 }

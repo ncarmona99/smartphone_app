@@ -166,5 +166,9 @@ export class RegistroPage {
     this._userService.agregar_usuario(this.perfilUsuario);
     this.router.navigate(['login']);
   }
+
+  irLogin(){
+    this.router.navigate(['login']);
+  }
 }
 
