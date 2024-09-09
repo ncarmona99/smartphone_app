@@ -5,13 +5,13 @@ import * as CryptoJS from 'crypto-js';
   providedIn: 'root'
 })
 export class AuthService {
-  private salt: string = 'some-random-salt'; // Cambia esto por una sal más segura en producción
+  private salt: string = 'some-random-salt'; 
 
   constructor() { }
 
-  // Método para encriptar la contraseña
+  //Método para encriptar la contraseña
   encryptPassword(password: string): string {
-    // Crear un hash usando SHA-256
+    //Se crea un hash usando SHA-256
     const hashed = CryptoJS.SHA256(password + this.salt).toString(CryptoJS.enc.Hex);
     return hashed;
   }

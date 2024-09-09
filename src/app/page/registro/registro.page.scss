@@ -30,8 +30,17 @@
 
 .inputs input {
   height: 30px;
-  margin-bottom: 5%;
   border-radius: 5px;
+}
+
+.titulo_campo{
+  margin-top: 5%;
+}
+
+.msg_error{
+  font-size: smaller;
+  color: red;
+  margin: 1%;
 }
 
 .inputs button {
@@ -41,7 +50,7 @@
   height: 30px;
   border-radius: 5px;
   width: 60%;
-  margin: 5px;
+  margin: 5%;
 }
 
 .sin_borde {

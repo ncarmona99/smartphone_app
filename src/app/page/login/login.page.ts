@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { ServiceUserService } from 'src/app/api/service-user/service-user.service';
-import { AuthService } from 'src/app/auth.service';
+import { AuthService } from 'src/app/api/service-auth/auth.service';
 import { PerfilUsuario } from 'src/app/models/perfil-usuario';
 import { User } from 'src/app/models/user';
 

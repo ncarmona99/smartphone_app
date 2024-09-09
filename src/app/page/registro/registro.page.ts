@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AuthService } from 'src/app/auth.service';
+import { AuthService } from 'src/app/api/service-auth/auth.service';
 import { PerfilUsuario } from 'src/app/models/perfil-usuario';
 import { ServiceUserService } from 'src/app/api/service-user/service-user.service';
 import { Router } from '@angular/router';
@@ -85,15 +85,12 @@ export class RegistroPage {
         input.classList.remove('borde_rojo');
       }
       // Para el placeholder
-      input.placeholder = esError ? errorMsg : '';
+      //input.placeholder = esError ? errorMsg : '';
     };
 
     // Verifica longitud del nombre de usuario
-    if (perfilUsuario.user.usuario.length > 20) {
-      error.usuario = "usuario demasiado largo (máximo de 20 caracteres)";
-      aplicarEstilos(inputUsuario, error.usuario, true);
-    } else if (perfilUsuario.user.usuario.length < 4) {
-      error.usuario = "usuario demasiado corto (mínimo de 4 caracteres)";
+    if (perfilUsuario.user.usuario.length < 4 || perfilUsuario.user.usuario.length > 20) {
+      error.usuario = "Ingrese un usuario de 4 a 20 caracteres";
       aplicarEstilos(inputUsuario, error.usuario, true);
     } else {
       aplicarEstilos(inputUsuario, '', false);
@@ -123,9 +120,9 @@ export class RegistroPage {
       aplicarEstilos(inputPassConfirm, '', true);
     } else if (perfilUsuario.user.password !== perfilUsuario.user.pass) {
       // Verifica coincidencia de contraseñas
-      error.password = "Las contraseñas no coinciden.";
+      error.password_match = "Las contraseñas no coinciden.";
       aplicarEstilos(inputPassword, '', false);
-      aplicarEstilos(inputPassConfirm, error.password, true);
+      aplicarEstilos(inputPassConfirm, error.password_match, true);
     } else {
       aplicarEstilos(inputPassword, '', false);
       aplicarEstilos(inputPassConfirm, '', false);
