@@ -16,21 +16,21 @@ const routes: Routes = [
   },
   {
     path: 'perfil-usuario',
-    loadChildren: () => 
-      import('./page/perfil-usuario/perfil-usuario.module').then( 
-        m => m.PerfilUsuarioPageModule)
+    loadChildren: () =>
+      import('./page/perfil-usuario/perfil-usuario.module').then(
+        (m) => m.PerfilUsuarioPageModule
+      ),
   },
   {
     path: 'home',
-    loadChildren: () => 
-      import('./home/home.module').then( 
-        m => m.HomePageModule)
+    loadChildren: () =>
+      import('./home/home.module').then((m) => m.HomePageModule),
   },
   {
     path: '',
-    redirectTo: 'registro',
-    pathMatch: 'full'
-  }
+    redirectTo: 'login',
+    pathMatch: 'full',
+  },
 ];
 
 @NgModule({

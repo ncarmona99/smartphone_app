@@ -1,33 +1,47 @@
-<ion-header>
-  <ion-toolbar color="primary">
-    <ion-title>Login</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
       <ion-title size="large">Login</ion-title>
     </ion-toolbar>
   </ion-header>
-
   <div id="container">
+    <div class="centro fondo">
+      <img class="margen" src="../assets/Logo.png" />
+    </div>
     <ion-list>
-      <ion-list>
-        <ion-item>
-          <!--Se obtiene el usuario ingresado y se le asigna al user-->
-          <ion-input [(ngModel)]="user.usuario" label="Usuario" placeholder=""></ion-input>
-        </ion-item>
-    
-        <ion-item>
-          <!--Se obtiene la password ingresada y se le asigna al user-->
-          <ion-input [(ngModel)]="user.password" label="Contraseña" type="password" value=""></ion-input>
-        </ion-item>
+      <ion-item>
+        <!--Se obtiene el usuario ingresado y se le asigna al user-->
+        <ion-label position="floating">Usuario</ion-label><br />
+        <ion-input
+          required
+          type="text"
+          placeholder="nicolito123"
+          fill="solid"
+          [(ngModel)]="user.usuario"
+          name="username"
+        ></ion-input>
+      </ion-item>
 
-        <!--El user se entrega por parámetro a la función login()-->
-        <ion-button id="button-ingresar" (click)="login(user)"> Ingresar </ion-button>
-    
-      </ion-list>
+      <ion-item>
+        <!--Se obtiene la password ingresada y se le asigna al user-->
+        <ion-label position="floating">Contraseña</ion-label><br />
+        <ion-input
+          required
+          type="password"
+          fill="solid"
+          name="password"
+          [(ngModel)]="user.password"
+        ></ion-input> </ion-item
+      ><br />
+
+      <!--El user se entrega por parámetro a la función login()-->
+      <div class="centro">
+        <ion-button id="button-ingresar" (click)="login(user)">
+          Ingresar
+        </ion-button>
+      </div>
+      <br />
+      <a (click)="IrRegistro()">¿No tienes una cuenta? ¡Regístrate!</a>
     </ion-list>
   </div>
 </ion-content>
